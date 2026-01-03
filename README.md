@@ -17,4 +17,7 @@ User experience is enhanced through a responsive layout and a clean, refined UI.
 - Responsive layout for different screen sizes
 
 ## How to Run
-Open the project folder and launch `index.html` in a web browser.
+
+This project is deployed on Vercel.  
+Access the live application here:  
+https://music-web-app-snowy.vercel.app/
