@@ -1,0 +1,249 @@
+<div class="container">
+  <!doctype html>
+  <html lang="en-CA">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=500, initial-scale=1" />
+
+      <meta name="author" content="Zainab Mustak Vadia" />
+
+      <title>Form</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 20;
+          background-color: ccc;
+        }
+
+        .data {
+          background-color: grey;
+          padding: 20px;
+          border-radius: 5px;
+          max-width: 600px;
+          margin: 20px auto;
+          color: black;
+        }
+
+        .headings {
+          display: block;
+          margin-bottom: 1px;
+          color: black;
+        }
+
+        input[type="text"],
+        input[type="year"],
+        input[list="genres"],
+        input[type="url"] {
+          width: calc(100% - 20px);
+          padding: 10px;
+          margin-bottom: 15px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+
+        #description {
+          width: calc(100% - 20px);
+          min-height: 150px;
+          padding: 10px;
+          margin-bottom: 15px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          resize: none;
+        }
+
+        .data input[type="checkbox"] {
+          width: auto;
+          margin-right: 5px;
+        }
+
+        .data button {
+          padding: 10px 15px;
+          background-color: black;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+
+        .data button:hover {
+          background-color: #ccc;
+        }
+
+        .main {
+          align-items: center;
+          color: white;
+          background-color: black;
+          text-align: center;
+          display: inline-block;
+          padding: 10px 20px;
+          text-decoration: none;
+          border-radius: 5px;
+          transition: background-color 0.3s;
+          border: none;
+          cursor: pointer;
+        }
+
+        #add-url {
+          margin-bottom: 20px;
+        }
+
+        .submit {
+          display: flex;
+          justify-content: center;
+        }
+      </style>
+    </head>
+    <body>
+      <main>
+        <form
+          class="data"
+          action="https://httpbin.org/post"
+          method="post"
+          enctype="text/plain"
+        >
+          <label for="appname" class="boldtext">POP Haven</label>
+          <label for="slogan/description">
+            <p>
+              <i>Your sanctuary to dive into the Pop Universe!</i><br /><br />
+              Welcome to the Pop Haven music app where every song will pull at
+              your hearts strings and make you fall in love with the artist.
+              Explore some of your beloved artists with the platform designed to
+              bring music closer to you. Embark on a journey with us, your
+              journey to dive into the pop universe. <br /></p
+          ></label>
+
+          <label for="artist-name" class="headings">Artist's Name:</label>
+          <br />
+          <input
+            type="text"
+            id="artist-name"
+            name="artist-name"
+            required
+            oninput="capitalFirstLetter(this)"
+            placeholder="Enter Artist name"
+          />
+          <br />
+
+          <label for="music-genre" class="headings">Music Genre:</label><br />
+          <input
+            list="genres"
+            type="text"
+            id="music-genre"
+            name="music-genre"
+            placeholder="Select a genre"
+            oninput="otherGenre(this.value)"
+          />
+          <datalist id="genres">
+            <option value="Pop"></option>
+            <option value="Rock"></option>
+            <option value="Country"></option>
+            <option value="Classical"></option>
+            <option value="Hip Hop"></option>
+            <option value="Jazz"></option>
+            <option value="Punk"></option>
+            <option value="Disco"></option>
+            <option value="Indie Rock"></option>
+            <option value="Soul"></option>
+            <option value="Other"></option>
+          </datalist>
+          <input
+            type="text"
+            id="other"
+            name="other"
+            style="display: none"
+            placeholder="Enter your genre"
+          />
+          <label for="social-media" class="headings">Social Media URLs:</label>
+          <br />
+          <input
+            type="url"
+            id="social-media"
+            name="social-media"
+            placeholder="Enter social media URL"
+            required
+          /><br />
+          <label for="song-urls" class="headings">Song/Video URLs:</label><br />
+          <div id="url-list">
+            <input
+              type="url"
+              id="song-urls"
+              name="song-video-urls[]"
+              placeholder="Enter song/video URL"
+              required
+            />
+          </div>
+          <button type="button" id="add-url" onclick="anotherUrl()">
+            Add More
+          </button>
+          <br />
+          <label for="explicit-lyrics">Contains Explicit Lyrics</label>
+          <input type="checkbox" id="explicit-lyrics" name="explicit-lyrics" />
+          <br />
+          <br />
+          <label for="description" class="headings"
+            >Description: <br />
+            <i>(At least 20 words)</i></label
+          ><br />
+          <textarea
+            id="description"
+            name="description"
+            minlength="20"
+            maxlength="150"
+            oninput="countWords()"
+            required
+          ></textarea>
+          <div id="word-count">Word count: 0</div>
+          <br /><br />
+          <div class="submit">
+            <button type="submit" style="width: 200px">Submit</button>
+          </div>
+        </form>
+      </main>
+      <script>
+        function anotherUrl() {
+          var songUrlList = document.getElementById("url-list");
+          var newSong = document.createElement("input");
+          newSong.type = "url";
+          newSong.name = "song-video-urls[]";
+          newSong.placeholder = "Enter another song/video URL";
+          newSong.required = true;
+          var line = document.createElement("br");
+          songUrlList.appendChild(line);
+          songUrlList.appendChild(newSong);
+        }
+
+        function countNumWords() {
+          const textarea = document.getElementById("description");
+          const countWords = document.getElementById("word-count");
+
+          if (textarea && countWords) {
+            let word = textarea.value.match(/\S+/g);
+            let wordCount = word ? word.length : 0;
+            countWords.textContent = "Word count: " + wordCount;
+          }
+        }
+
+        function capitalFirstLetter(input) {
+          let name = input.value.split(/\s+/).map((name) => {
+            return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+          });
+          input.value = name.join(" ");
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+          const textarea = document.getElementById("description");
+          countNumWords();
+          textarea.addEventListener("input", countNumWords);
+        });
+
+        function otherGenre(value) {
+          const otherInput = document.getElementById("other");
+          otherInput.style.display = value === "Other" ? "block" : "none";
+        }
+      </script>
+
+      <a href="index.html" class="main">Main Page</a>
+    </body>
+  </html>
+</div>

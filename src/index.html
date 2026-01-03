@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=500, initial-scale=1" />
+
+    <meta name="author" content="Zainab Mustak Vadia" />
+
+    <title>WEB222 Music App</title>
+    <!-- Classless CSS Stylesheet - https://watercss.kognise.dev/ -->
+    <link rel="stylesheet" href="./css/water.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20;
+        background-color: black;
+      }
+
+      h1 {
+        text-align: center;
+        font-family: "Arial", sans-serif;
+        font-size: 48px;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        letter-spacing: 2px;
+      }
+
+      p {
+        font-size: 14px;
+        color: white;
+        margin: 8px 0;
+      }
+
+      #selected-artist {
+        font-size: 2rem;
+        text-align: center;
+        margin: 1rem 0;
+        color: white;
+      }
+
+      #cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.1rem;
+        padding: 1rem;
+        justify-content: center;
+      }
+
+      .card {
+        border: 1px solid #60402f;
+        border-radius: 10px;
+        background-color: white;
+        box-shadow: 0px 5px 9px rgba(0, 0, 0, 0.1);
+        transition:
+          transform 0.7s,
+          box-shadow 0.3s;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card:hover {
+        transform: scale(1.06);
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .card-image {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 12px;
+        display: block;
+        margin: auto;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .horizontal-line {
+        border: none;
+        border-top: 1px solid #000;
+        margin: 0.5em 0;
+        margin-top: 2.5rem;
+      }
+
+      .year-duration-container {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .year-released,
+      .duration {
+        background-color: white;
+        color: grey;
+        text-decoration: underline;
+      }
+
+      .song-title {
+        display: block;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+
+      a {
+        color: #666;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #request,
+      #add-url,
+      #signup-email {
+        align-items: center;
+        color: black;
+        background-color: white;
+        text-align: center;
+        display: inline-block;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        border: none;
+        cursor: pointer;
+      }
+
+      #signup-email {
+        background-color: black;
+        color: white;
+        width: 230px;
+      }
+      footer button {
+        padding: 10px 20px;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      footer button:hover {
+        background-color: grey;
+      }
+
+      footer {
+        background-color: #f3f3f3;
+        padding: 20px;
+        text-align: center;
+        color: black;
+      }
+
+      footer form {
+        margin-top: 20px;
+      }
+
+      h2 {
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>POP Haven</h1>
+      <p>
+        <i>Your sanctuary to dive into the Pop Universe!</i><br /><br />
+        Welcome to the Pop Haven music app where every song will pull at your
+        hearts strings and make you fall in love with the artist. Explore some
+        of your beloved artists with the platform designed to bring music closer
+        to you. Embark on a journey with us, your journey to dive into the pop
+        universe. <br />
+      </p>
+    </header>
+
+    <nav id="menu">
+      <!-- Dynamically create your menu category buttons here -->
+    </nav>
+
+    <hr />
+
+    <main>
+      <h2 id="selected-artist">
+        <!-- Dynamically update the selected category title -->
+      </h2>
+      <table>
+        <tbody id="songs">
+          <div id="cards">
+            <!-- Song cards will be dynamically inserted here -->
+          </div>
+          <!-- Dynamically create your product rows here -->
+
+          <div class="container">
+            <br /><br /><br />
+            <div id="request"></div>
+          </div>
+        </tbody>
+      </table>
+    </main>
+
+    <!-- JavaScript Data Files -->
+    <script src="./js/artists.js"></script>
+    <script src="./js/songs.js"></script>
+
+    <!-- Main App JavaScript File -->
+    <script src="./js/app.js"></script>
+
+    <footer>
+      <form action="https://httpbin.org/post" method="post">
+        <div class="newsletter">
+          <label for="signup-email"
+            ><i
+              ><h2>
+                Sign up for our newsletter to get updates on new releases,
+                artists and more:
+              </h2></i
+            ></label
+          >
+          <br /><br />
+          <input
+            type="email"
+            id="signup-email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          /><br />
+          <label for="terms"> I agree to the terms and conditions</label>
+          <input type="checkbox" id="terms" name="terms" required /><br /><br />
+          <button type="submit">Sign up</button>
+        </div>
+      </form>
+    </footer>
+  </body>
+</html>
